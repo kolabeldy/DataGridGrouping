@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace DataGridGrouping
+namespace DataGridGrouping.Converters
 {
     [ValueConversion(typeof(Boolean), typeof(String))]
     public class CompleteConverter : IValueConverter
@@ -12,15 +12,15 @@ namespace DataGridGrouping
         {
             bool complete = (bool)value;
             if (complete)
-                return "Complete";
+                return "Выполнено";
             else
-                return "Active";
+                return "В работе";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             string strComplete = (string)value;
-            if (strComplete == "Complete")
+            if (strComplete == "Выполнено")
                 return true;
             else
                 return false;
