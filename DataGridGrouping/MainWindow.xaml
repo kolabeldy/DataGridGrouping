@@ -11,35 +11,33 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Group, Sort, and Filter Example" 
+        Title="Group DataGrid Example" 
         Height="800" 
         Width="800" 
         WindowStartupLocation="CenterScreen">
+    
     <Window.Resources>
         <local:CompleteConverter x:Key="completeConverter" />
-        <local:Tasks x:Key="tasks" />
-        <CollectionViewSource x:Key="cvsTasks" Source="{StaticResource tasks}" 
-                              Filter="CollectionViewSource_Filter">
-            <CollectionViewSource.SortDescriptions>
-                <!-- Requires 'xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"' declaration. -->
-                <scm:SortDescription PropertyName="ProjectName"/>
-                <scm:SortDescription PropertyName="Complete" />
-                <scm:SortDescription PropertyName="DueDate" />
-            </CollectionViewSource.SortDescriptions>
+        <CollectionViewSource x:Key="cvsTasks" Source="{Binding MyTasks}" >
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="ProjectName"/>
                 <PropertyGroupDescription PropertyName="Complete"/>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
     </Window.Resources>
+    
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <DataGrid x:Name="dataGrid1" 
+                  HorizontalAlignment="Left"
+                  Width="500"
+                  Margin="10"
                   ItemsSource="{Binding Source={StaticResource cvsTasks}}"
                   CanUserAddRows="False">
+            
             <DataGrid.GroupStyle>
                 <!-- Style for groups at top level. -->
                 <GroupStyle>
@@ -49,14 +47,13 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type GroupItem}">
-                                        <Expander IsExpanded="True" 
-                                                  Background="{StaticResource PrimaryHueMidBrush}"
-                                                  Foreground="WhiteSmoke">
+                                        <Expander IsExpanded="False" 
+                                                  Background="DarkGray"
+                                                  Foreground="White">
                                             <Expander.Header>
                                                 <DockPanel>
                                                     <TextBlock FontWeight="Bold" 
                                                                Text="{Binding Path=Name}" 
-                                                               Margin="5,0,0,0" 
                                                                Width="100"/>
                                                     <TextBlock FontWeight="Bold" 
                                                                Text="{Binding Path=ItemCount}"/>
@@ -77,7 +74,7 @@
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
                             <DockPanel Background="LightGray"
-                                       Height="30">
+                                       Height="40">
                                 <TextBlock Text="{Binding Path=Name, Converter={StaticResource completeConverter}}" 
                                            VerticalAlignment="Center"
                                            Foreground="{DynamicResource MaterialDesignBody}" 
@@ -105,16 +102,13 @@
         <StackPanel Orientation="Horizontal" 
                     Grid.Row="1"
                     Margin="10">
-            <TextBlock Text=" Filter completed items " VerticalAlignment="Center" />
-            <CheckBox x:Name="cbCompleteFilter" VerticalAlignment="Center"
-                      Checked="CompleteFilter_Changed" Unchecked="CompleteFilter_Changed" />
-            <Button Content="Remove Groups" 
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Margin="10,2,2,2" 
-                    Click="UngroupButton_Click" />
-            <Button Content="Group by Project/Status" 
-                    Margin="2" 
-                    Click="GroupButton_Click" />
+            
+            <TextBlock Text=" Open/Close groups " 
+                       VerticalAlignment="Center" />
+            <CheckBox x:Name="cbIsExpanded" 
+                      IsChecked="{Binding IsGroupExpanded}"
+                      VerticalAlignment="Center" />
+
         </StackPanel>
     </Grid>
 </Window>
