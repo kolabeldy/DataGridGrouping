@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace DataGridGrouping
+namespace DataGridGrouping.Models
 {
     public class Task : INotifyPropertyChanged, IEditableObject
     {

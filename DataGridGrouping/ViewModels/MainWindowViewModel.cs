@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DataGridGrouping.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace DataGridGrouping
+namespace DataGridGrouping.ViewModels
 {
     public class MainWindowViewModel
     {
@@ -14,7 +15,6 @@ namespace DataGridGrouping
             get { return _MyTasks; }
             set => Set(ref _MyTasks, value);
         }
-
         public MainWindowViewModel()
         {
             GetTasks();

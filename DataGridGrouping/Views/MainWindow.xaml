@@ -1,4 +1,4 @@
-﻿<Window x:Class="DataGridGrouping.MainWindow"
+﻿<Window x:Class="DataGridGrouping.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:DataGridGrouping"
@@ -73,19 +73,20 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <DockPanel Background="LightGray"
-                                       Height="40">
+                            <StackPanel Background="LightGray"
+                                        Orientation="Horizontal"
+                                        Height="40">
                                 <TextBlock Text="{Binding Path=Name, Converter={StaticResource completeConverter}}" 
                                            VerticalAlignment="Center"
                                            Foreground="{DynamicResource MaterialDesignBody}" 
-                                           Margin="30,0,0,0" 
-                                           FontWeight="DemiBold"
-                                           Width="100"/>
+                                           Margin="25,0,0,0" 
+                                           FontWeight="DemiBold" />
                                 <TextBlock Text="{Binding Path=ItemCount}" 
                                            VerticalAlignment="Center"
+                                           Margin="62,0,0,0" 
                                            FontWeight="DemiBold"
                                            Foreground="{DynamicResource MaterialDesignBody}"/>
-                            </DockPanel>
+                            </StackPanel>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>

@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using DataGridGrouping.ViewModels;
+using System.Windows;
 
-namespace DataGridGrouping
+namespace DataGridGrouping.Views
 {
     public partial class MainWindow : Window
     {
